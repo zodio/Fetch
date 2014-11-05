@@ -94,6 +94,14 @@ class Server
     protected $options = 0;
 
     /**
+     * Connection parameters, the following (string) keys maybe used to set one or more connection parameters
+     * DISABLE_AUTHENTICATOR - Disable authentication properties - GSSAPI Or NTLM
+     *
+     * @var array
+     */
+    protected $parameters = array();
+
+    /**
      * This is the resource connection to the server. It is required by a number of imap based functions to specify how
      * to connect.
      *
@@ -145,6 +153,25 @@ class Server
     {
         $this->username = $username;
         $this->password = $password;
+    }
+
+    /**
+     * This function sets parameter to connect to the server.
+     *
+     * @param string $authenticationType GSSAPI or NTLM
+     */
+    public function setDisableAuthentication($authenticationType)
+    {
+        $this->parameters = array('DISABLE_AUTHENTICATOR' => $authenticationType);
+    }
+
+    /**
+     * This function clear parameter to connect to the server.
+     *
+     */
+    public function clearDisableAuthentication()
+    {
+        $this->parameters = array();
     }
 
     /**
@@ -288,7 +315,7 @@ class Server
             if (!imap_reopen($this->imapStream, $this->getServerString(), $this->options, 1))
                 throw new \RuntimeException(imap_last_error());
         } else {
-            $imapStream = imap_open($this->getServerString(), $this->username, $this->password, $this->options, 1);
+            $imapStream = imap_open($this->getServerString(), $this->username, $this->password, $this->options, 1, $this->parameters);
 
             if ($imapStream === false)
                 throw new \RuntimeException(imap_last_error());
