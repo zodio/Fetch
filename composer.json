@@ -1,14 +1,18 @@
 {
-  "name": "tedivm/fetch",
-  "description": "A PHP IMAP Library",
+  "name": "zodio/fetch",
+  "description": "A PHP IMAP Library fork from tedious/Fetch",
   "keywords": ["email","imap","pop3"],
-  "homepage": "http://github.com/tedious/Fetch",
+  "homepage": "http://github.com/zodio/Fetch",
   "type": "library",
   "license": "BSD-3-Clause",
   "authors": [
     {
       "name": "Robert Hafner",
       "email": "tedivm@tedivm.com"
+    },
+    {
+      "name": "Poom",
+      "email": "poom@zodio.com"
     }
   ],
   "require": {
